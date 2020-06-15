@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+    {% if current_user.is_authenticated %}
+    <h1 class="page-header">Welcome back, {{ current_user.username }}!</h1>
+    {% include '_renderforms.html' %}
+    {% else %}
+    <h1 class="page-header">Welcome to the Daoism Blog!</h1>
+    {% endif %}
+
+    {% if blogs %}
+    <div class="content-section">
+        <h3 class="section-header">Recent Blogs</h3>
+        {% for item in blogs %}
+            {% include '_blogslist.html' %}
+        {% endfor %}
+
+        <nav class="content-section" aria-label="...">
+            <ul class="pager">
+                <li class="previous{% if not blog_prev_url %} disabled{% endif %}">
+                    <a href="{{ blog_prev_url or '#' }}">
+                        <span aria-hidden="true">&larr;</span>Newer Blogs
+                    </a>
+                </li>
+                <li class="next{% if not blog_next_url %} disabled{% endif %}">
+                    <a href="{{ blog_next_url or '#' }}">
+                        Older Blogs<span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+
+    {% if shown_posts %}
+    <div class="content-section">
+        <h3 class="section-header">See What Other Users Are Saying:</h3>
+        {% for item in shown_posts %}
+            {% include '_userstatus.html' %}
+        {% endfor %}
+
+        <nav class="content-section" aria-label="...">
+            <ul class="pager">
+                <li class="previous{% if not post_prev_url %} disabled{% endif %}">
+                    <a href="{{ post_prev_url or '#' }}">
+                        <span aria-hidden="true">&larr;</span>Newer Posts
+                    </a>
+                </li>
+                <li class="next{% if not post_next_url %} disabled{% endif %}">
+                    <a href="{{ post_next_url or '#' }}">
+                        Older Posts<span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+
+{% endblock %}

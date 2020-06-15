@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+    <div class="blog-parent">
+        <h2 class="blog-header"><span class="blog-heading1 label label-primary">Title</span></h2>
+        <div class="panel panel-primary">
+            <div class="blog-title panel-body">{{ blog_viewed.title }}</div>
+        </div>
+        <h2 class="blog-header"><span class="blog-header blog-heading2 label label-primary">Author</span></h2>
+        <div class="panel panel-primary">
+            <div class="blog-author panel-body">
+                <span class="user-popup"><a href="{{ url_for('main.profile', username=blog_viewed.author.username) }}">
+                {{ blog_viewed.author.username }}
+                </a></span></div>
+        </div>
+        <h2 class="blog-header"><span class="blog-header blog-heading3 label label-primary">Date Created</span></h2>
+        <div class="panel panel-primary">
+            <div class="blog-date panel-body">{{ blog_viewed.timestamp.strftime('%d-%b-%Y; %I:%M:%S%p') }}</div>
+        </div>
+        <h2 class="blog-header"><span class="blog-header blog-heading4 label label-primary">Blog Synopsis</span></h2>
+        <div class="panel panel-primary">
+            <div class="blog-synopsis panel-body">{{ blog_viewed.synopsis }}</div>
+        </div>
+        <h2 class="blog-header"><span class="blog-header blog-heading5 label label-primary">Blog Content</span></h2>
+        <div class="panel panel-primary">
+            <div class="blog-body panel-body">{{ blog_viewed.body }}</div>
+        </div>
+
+        {% if blog_viewed.author == current_user %}
+        <br>
+        <div class="blog-update">
+            <a class="btn btn-primary" href="{{ url_for('blogs.update_blog', username=current_user.username, blog_id=blog_viewed.id) }}" role="button">Update Blog</a>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

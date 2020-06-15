@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+
+{% block app_content %}
+    <div class="profile-header">
+        <div class="profile-pic"><img src="{{ user.avatar(125) }}"/></div>
+        <div class="profile-user">This is {{ user.username }}'s Profile!</div>
+        {% if user.about_me %}
+        <div class="profile-about-me">
+            <h3 class="about-me-header">About this User:</h3><br>
+            {{ user.about_me }}
+        </div>
+        {% endif %}
+
+        <!-- change p tags to unordered list -->
+        <div class="profile-actions">
+            {% if user != current_user %}
+            <div class="list-group">
+                {% if not current_user.is_following(user) %}
+                <a class="list-group-item" href="{{ url_for('main.follow', username=user.username) }}">Follow</a>
+                {% else %}
+                <a class="list-group-item" href="{{ url_for('main.unfollow', username=user.username) }}">Unfollow</a>
+                {% endif %}
+                {% if user.verify_request(current_user) %}
+                <a class="list-group-item" href="{{ url_for('main.friend_request', username=user.username) }}">Send Friend Request</a>
+                {% elif current_user in user.pending_friend_requests %}
+                <a class="list-group-item">Friend Request Sent</a>
+                {% elif user in current_user.pending_friend_requests %}
+                <a class="list-group-item">User Has Sent You A Friend Request</a>
+                {% else %}
+                <a class="list-group-item" href="{{ url_for('main.unfriend', username=user.username) }}">Unfriend User</a>
+                {% endif %}
+                <a class="list-group-item" href="{{ url_for('main.send_message', user=user.username) }}">Send A Message!</a>
+            {% elif current_user == user %}
+                <a class="list-group-item" href="{{ url_for('main.update_profile', username=user.username) }}">Update Your Profile</a>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h3 class="section-header">See What This User Has to Say:</h3>
+        {% if statuses %}
+            {% for item in statuses %}
+                {% include '_userstatus.html' %}
+            {% endfor %}
+        {% else %}
+            <div><h4>User Has Not Posted Anything here Yet!</h4></div>
+        {% endif %}
+    </div>
+
+    <nav class="content-section" aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not status_prev_url %} disabled{% endif %}">
+                <a href="{{ status_prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span>Newer Posts
+                </a>
+            </li>
+            <li class="next{% if not status_next_url %} disabled{% endif %}">
+                <a href="{{ status_next_url or '#' }}">
+                    Older Posts<span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="content-section">
+        <h3 class="section-header">See The Blogs Posted by This User:</h3>
+        {% if blogs %}
+            {% for item in blogs %}
+                {% include '_blogslist.html' %}
+            {% endfor %}
+        {% else %}
+            <div><h4>Nothing to see here yet. Keep an eye out though!</h4></div>
+        {% endif %}
+    </div>
+
+    <nav class="content-section" aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not blog_prev_url %} disabled{% endif %}">
+                <a href="{{ blog_prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span>Newer Blogs
+                </a>
+            </li>
+            <li class="next{% if not blog_next_url %} disabled{% endif %}">
+                <a href="{{ blog_next_url or '#' }}">
+                    Older Blogs<span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+{% endblock %}

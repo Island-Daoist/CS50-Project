@@ -1,0 +1,279 @@
+/* CSS styling for body of application webpages */
+/*----------------------------------------------*/
+.parent {
+
+}
+
+* {
+    font-family: "Times New Roman", Times, serif;
+}
+
+body {
+    background-color: #e9f2f5!important;
+}
+
+
+/* CSS Styling for List type constructs in application */
+/*-----------------------------------------------------*/
+.user-avatar {
+    grid-area: user-avatar;
+}
+
+.user-username {
+    grid-area: user-username;
+}
+
+.content-title {
+    grid-area: content-title;
+}
+
+.content-body {
+    grid-area: content-body;
+}
+
+.content-extra {
+    grid-area: content-extra;
+    font-size: 0.75em;
+}
+
+.parent-lists {
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "user-avatar content-title content-title content-title"
+        "user-username content-body content-body content-body"
+        ". content-extra content-extra content-extra";
+    font-size: 1.5em;
+    border: solid 1px black;
+    background-color: #d1e1e6;
+    padding-right: 20px;
+}
+
+.child {
+    color: #06519c;
+    padding-left: 75px;
+}
+
+.content-date {
+    font-size: 0.75em;
+}
+
+
+/* CSS styling for Form type constructs in application */
+/*-----------------------------------------------------*/
+.parent-forms {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 50px;
+    grid-row-gap: 55px;
+    font-size: 1.5em;
+    border: solid 1px black;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    background-color: #c5b1c7;
+}
+
+.child-form > .text-field {
+    grid-row-gap: 100px;
+}
+
+.parent-forms > .string-field {
+
+}
+
+.parent-forms > .password-field {
+
+}
+
+.child-form > textarea {
+    grid-row-gap: 150px;
+}
+
+.child-form > .submit-field {
+    grid-row-gap: 150px;
+}
+
+label {
+    font-family: "Times New Roman", Times, serif;
+}
+
+
+/* CSS styling for header of profile page in application */
+/*-------------------------------------------------------*/
+.profile-header {
+    display: grid;
+    grid-template-areas: "profile-pic profile-user profile-about-me profile-about-me"
+                         "profile-pic profile-actions profile-about-me profile-about-me";
+    grid-template-columns: 1fr 2fr 2fr 2fr;
+    grid-template-rows: auto auto;
+    padding-bottom: 20px;
+    text-align: center;
+    background-color: #e9f2f5;
+    color: #3e3f40;
+}
+
+.profile-pic {
+    grid-area: profile-pic;
+}
+
+.profile-user {
+    grid-area: profile-user;
+    font-size: 2em;
+    font-weight: bold;
+    color: #3e3f40;
+}
+
+.profile-about-me {
+    grid-area: profile-about-me;
+}
+
+.profile-about-me > h3 {
+    text-decoration: underline overline;
+}
+
+.profile-actions {
+    grid-area: profile-actions;
+}
+
+
+/* CSS styling for friend requests application page */
+/*--------------------------------------------------*/
+.friend-requests-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    background-color: #e9f2f5;
+}
+
+.single-friend-request {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1.5fr;
+    grid-template-rows: auto;
+    grid-template-areas: "request-user request-approve request-deny";
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.request-user {
+    grid-area: request-user;
+    font-size: 2em;
+    text-align: center;
+}
+
+.request-date {
+    grid-area: request-date;
+    text-align: center;
+}
+
+.request-approve {
+    grid-area: request-approve;
+}
+
+.request-deny {
+    grid-area: request-deny;
+}
+
+
+/* CSS styling for blog pages in application */
+/*-------------------------------------------*/
+.blog-parent {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: repeat(5, auto);
+    grid-template-areas: "blog-heading1 blog-title"
+                         "blog-heading2 blog-author"
+                         "blog-heading3 blog-date"
+                         "blog-heading4 blog-synopsis"
+                         "blog-heading5 blog-body";
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #e9f2f5;
+    color: #3e3f40;
+    font-size: 1.4em;
+}
+
+.blog-header {
+    text-align: center;
+}
+
+.blog-heading1 {
+    grid-area: blog-heading1;
+    text-align: center;
+}
+
+.blog-heading2 {
+    grid-area: blog-heading2;
+}
+
+.blog-heading3 {
+    grid-area: blog-heading3;
+}
+
+.blog-heading4 {
+    grid-area: blog-heading4;
+}
+
+.blog-heading5 {
+    grid-area: blog-heading5;
+}
+
+.blog-title {
+    grid-area: blog-title;
+}
+
+.blog-author {
+    grid-area: blog-author;
+}
+
+.blog-date {
+    grid-area: blog-date;
+}
+
+.blog-synopsis {
+    grid-area: blog-synopsis;
+}
+
+.blog-body {
+    grid-area: blog-body;
+}
+
+
+
+
+/* CSS styling for various other application elements on page */
+/*------------------------------------------------------------*/
+.page-header {
+    font-family: "Times New Roman", Times, serif;
+    padding-left: 20px;
+    background-color: #e9f2f5;
+    font-weight: bold;
+    color: #3e3f40;
+}
+
+.section-header {
+    font-family: "Times New Roman", Times, serif;
+    padding-left: 20px;
+    background-color: #e1eaed;
+    color: #3e3f40;
+}
+
+.section-footer {
+    background-color: #e1eaed;
+}
+
+.content-section {
+    background-color: #e9f2f5;
+}
+
+
+/* media screen size controls */
+/*----------------------------*/
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (min-width: 1200px) {
+
+}

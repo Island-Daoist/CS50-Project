@@ -1,0 +1,53 @@
+<form class="parent parent-forms" action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+
+    {# could also use the following but is more specific
+    {% for field in form if field.id != "csrf_token" %}
+    #}
+
+    {% for field in form if field.widget.input_type != "hidden" %}
+    {% if field.type == "BooleanField" %}
+    <div class="child-form form-group">
+        {{ field(class_="") }}
+        {{ field.label }}
+    </div>
+    {% elif field.type == "SubmitField" %}
+    <div class="child-form form-group">
+        {{ field(class_="btn btn-default submit-field") }}
+    </div>
+    {% else %}
+    <div class="child-form form-group">
+        {{ field.label }}<br>
+        {% if field.type == "StringField" %}
+            {{ field(class_="string-field") }}<br>
+        {% elif field.type == "TextAreaField" %}
+            {{ field(class_="form-control text-field", rows="2.5") }}<br>
+        {% elif field.type == "PasswordField" %}
+            {{ field(class_="password-field") }}<br>
+        {% endif %}
+        {% for error in field.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endfor %}
+
+{# long form of rendering form fields
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+    <p>{{ form.submit() }}</p>
+#}
+</form>

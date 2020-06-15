@@ -1,0 +1,52 @@
+{% extends '_base_list_template.html' %}
+
+{# <table class="table table-hover">
+    <tr>
+        {% if message.author.avatar %}
+        <td width="70px">
+            <a href="{{ url_for('main.profile', username=message.author.username) }}">
+                <img src="{{ message.author.avatar(70) }}" />
+            </a>
+        </td>
+        {% endif %}
+        <td>
+            {% set user_link %}
+                <span class="user_popup">
+                    <a href="{{ url_for('main.profile', username=message.author.username) }}">
+                        {{ message.author.username }}
+                    </a>
+                </span>
+            {% endset %}
+            ///
+            {{ _('%(username)s said %(when)s',
+                username=user_link, when=moment(message.timestamp).fromNow()) }}
+            <br>
+            ///
+            <span id="status{{ message.id }}">{{ message.body }}</span>
+        </td>
+    </tr>
+</table>
+#}
+{#
+<p>
+    <a href="{{ url_for('main.profile', username=message.author.username) }}">
+                <img src="{{ message.author.avatar(30) }}" />
+    </a>
+    <a href="{{ url_for('main.profile', username=message.author.username) }}">{{ message.author.username }}</a>
+    said: {{ message.body }}
+    <br>
+    <a href="{{ url_for('main.send_message', user=message.author.username) }}">Reply</a>
+</p>
+#}
+
+{% block item_content %}
+    <div class="child content-title content-date">
+        {{ item.timestamp.strftime('%d-%b-%Y; %I:%M:%S%p') }}
+    </div>
+    <div class="child content-body">
+        {{ item.body }}
+    </div>
+    <div class="child content-extra">
+        <a href="{{ url_for('main.send_message', user=item.author.username) }}">Reply</a>
+    </div>
+{% endblock %}

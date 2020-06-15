@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+
+<h1 class="page-header">Pending Friend Requests</h1>
+
+{% if requests %}
+<form class="friend-requests-grid" action="" method="post">
+    {% for request in requests %}
+        <div class="single-friend-request">
+            <div class="request-user"><a href="{{ url_for('main.profile', username=request.username) }}">{{ request.username }}</a></div>
+            {% if request.timestamp %}
+            <div class="request-date">Sent: {{ request.timestamp.strftime('%d-%b-%Y; %I:%M:%S%p') }}</div>
+            {% endif %}
+            <div class="request-approve"><button class="btn btn-success btn-lg btn-block" type="submit" name="accept" id="accept {{ request.id }}" value="{{ request.id }}">Accept</button></div>
+            <div class="request-deny"><button  class="btn btn-danger btn-lg btn-block" type="submit" name="deny" id="deny {{ request.id }}" value="{{ request.id }}">Deny</button></div>
+        </div>
+    {% endfor %}
+</form>
+
+{% else %}
+<div class="content-section">
+    <h3 class="section-header">No new requests right now. Check back later, or send some yourself!</h3>
+</div>
+{% endif %}
+
+{% endblock %}

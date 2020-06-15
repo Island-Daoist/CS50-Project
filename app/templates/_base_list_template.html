@@ -1,0 +1,16 @@
+<div class="parent parent-lists">
+    <div class="child user-avatar">
+        <a href="{{ url_for('main.profile', username=item.author.username) }}">
+            <img src="{{ item.author.avatar(30) }}" />
+        </a>
+    </div>
+    <div class="child user-username">
+        <span class="user-popup ">
+        <a href="{{ url_for('main.profile', username=item.author.username) }}">
+            {{ item.author.username }}
+        </a>
+        </span>
+    </div>
+    {% block item_content %}
+    {% endblock %}
+</div>

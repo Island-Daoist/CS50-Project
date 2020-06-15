@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+    <h1 class="section-header">Send A Message to {{ user.username }}</h1>
+    {% include '_renderforms.html' %}
+{% endblock %}

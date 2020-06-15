@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+{#
+    {% for blog in blogs_list %}
+        <div class="parent">
+            <div class="child author-avatar"><img src="{{ blog.author.avatar(30) }}" /></div>
+            <div class="child blog-author">{{ blog.author.username }}</div>
+            <div class="child blog-title"><a href="{{ url_for('blogs.blog', blog_id=blog.id) }}">{{ blog.title }}</a></div>
+            <div class="child blog-synopsis">{{ blog.synopsis }}</div>
+
+            {% if blog.author == current_user %}
+            <div class="child blog-update"><a href="{{ url_for('blogs.update_blog', username=current_user.username, blog_id=blog.id) }}">Update Blog</a></div>
+            {% endif %}
+        </div>
+    {% endfor %}
+#}
+
+    <h1 class="page-header">Take a Look Below!</h1>
+    {% for item in blogs_list %}
+        {% include '_blogslist.html' %}
+    {% endfor %}
+
+    <nav class="content-section" aria-label="...">
+            <ul class="pager">
+                <li class="previous{% if not prev_url %} disabled{% endif %}">
+                    <a href="{{ prev_url or '#' }}">
+                        <span aria-hidden="true">&larr;</span>Newer Blogs
+                    </a>
+                </li>
+                <li class="next{% if not next_url %} disabled{% endif %}">
+                    <a href="{{ next_url or '#' }}">
+                        Older Blogs<span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+{% endblock %}

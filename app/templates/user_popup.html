@@ -1,0 +1,38 @@
+<table class="table">
+    <tr>
+        <td width="64" style="border: 0px;"><img src="{{ user.avatar(64) }}"></td>
+        <td style="border: 0px;">
+            <div>
+                <a href="{{ url_for('main.profile', username=user.username) }}">
+                    {{ user.username }}
+                </a>
+            </div>
+            <small>
+                {% if user.about_me %}<div>{{ user.about_me }}</div>{% endif %}
+                <div>{{ user.followers.count() }} followers,
+                    {{ user.followed.count() }} followed</div>
+                {% if user != current_user %}
+                    {% if not current_user.is_following(user) %}
+                    <div><a href="{{ url_for('main.follow', username=user.username) }}">
+                        Follow
+                    </a></div>
+                    {% else %}
+                    <div><a href="{{ url_for('main.unfollow', username=user.username) }}">
+                        Unfollow
+                    </a></div>
+                    {% endif %}
+                    {% if user.verify_request(current_user) %}
+                        <div><a href="{{ url_for('main.friend_request', username=user.username) }}">Send Friend Request</a></div>
+                    {% elif current_user in user.pending_friend_requests %}
+                        <div>Friend Request Sent</div>
+                    {% elif user in current_user.pending_friend_requests %}
+                        <div>User Has Sent You A Friend Request</div>
+                    {% else %}
+                        <div><a href="{{ url_for('main.unfriend', username=user.username) }}">Unfriend User</a></div>
+                    {% endif %}
+                        <div><a href="{{ url_for('main.send_message', user=user.username) }}">Send A Message!</a></div>
+                {% endif %}
+            </small>
+        </td>
+    </tr>
+</table>

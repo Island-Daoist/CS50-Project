@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+    <h1 class="section-header">Sign In</h1>
+    {% include '_renderforms.html' %}
+    <br>
+    <div class="section-footer list-group">
+        <a class="list-group-item" href="{{ url_for('auth.reset_password_request') }}">Forgot your Password? Click Here!</a>
+        <a class="list-group-item" href="{{ url_for('auth.register') }}">New User? Click to Register!</a>
+    </div>
+{% endblock %}
